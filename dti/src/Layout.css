@@ -1,0 +1,40 @@
+/* In your CSS file */
+.grid {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Assuming you want a fixed-width header */
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "header header"
+        "sidebar content";
+    height: 100vh; /* Ensure full viewport height */
+}
+
+.col-header {
+    grid-area: header;
+}
+
+.col-sidebar {
+    grid-area: sidebar;
+}
+
+.col-content {
+    grid-area: content;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "content";
+    }
+}

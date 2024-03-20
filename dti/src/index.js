@@ -10,13 +10,16 @@ import Sign from './Component/Sign/Sign.jsx';
 import Logout from './Component/Logout/Logout.jsx';
 import About from './Component/About/About.jsx';
 import Acknowledgement from './Component/Acknowledgement/Acknowledgement.jsx';
+// import Navbar from './Component/ShopListing/Navbar.jsx';
+import Header from './Component/Header/Header.jsx';
+import LISTSTOREBUTTON from './Component/ShopListing/ListStoreButton.jsx';
 
 
 
 const router=createBrowserRouter([
   {
     path:'/',
-    element:<Layout/>,
+    element:<Header/>,
   },
   {
     path:'/login',
@@ -37,7 +40,15 @@ const router=createBrowserRouter([
   {
     path:'/acknowledgement',
     element:<Acknowledgement/>
-  }
+  },
+  {
+    path:'/shoplisting',
+    element:<Layout/>
+  },
+  {
+    path:'/liststorebutton',
+    element:<LISTSTOREBUTTON/>
+  },
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

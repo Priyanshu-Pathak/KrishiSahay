@@ -74,16 +74,18 @@ const Logout = () => {
       />
       <header className="shadow sticky z-50 top-0">
             <div style={glassEffectBoxStyle}>
-                <div className=' float-left' style={{...imageStyle, padding: '10px',paddingLeft:'15px',paddingTop:'13px',position: 'relative',zIndex: '1'}}>
-                <img
-                            src={Shop}
-                            style={{ ...picStyle, ...zoomedImageStyle }}
-                            className="w-full h-full object-cover "
-                            alt="Shop"
-                            onMouseOverCapture={(e) => { e.target.style.transform = 'scale(1.3)'; e.target.parentNode.style.zIndex = '5'; }}
-                            onMouseOutCapture={(e) => { e.target.style.transform = 'scale(1)'; e.target.parentNode.style.zIndex = '1'; }}
-                        />
-                </div>
+            <div className=' float-left' style={{...imageStyle, padding: '10px',paddingLeft:'15px',paddingTop:'13px',position: 'relative',zIndex: '1'}}>
+                <Link to="/shoplisting">
+                    <img
+                                src={Shop}
+                                style={{ ...picStyle, ...zoomedImageStyle }}
+                                className="w-full h-full object-cover "
+                                alt="Shop"
+                                onMouseOverCapture={(e) => { e.target.style.transform = 'scale(1.3)'; e.target.parentNode.style.zIndex = '5'; }}
+                                onMouseOutCapture={(e) => { e.target.style.transform = 'scale(1)'; e.target.parentNode.style.zIndex = '1'; }}
+                            />
+                    </Link>
+                </div> 
                 <div className=' float-right' style={{...imageStyle, padding: '10px',paddingRight:'15px',paddingTop:'13px',position: 'relative',zIndex: '2'}}>
                 <img
                             src={Weather}

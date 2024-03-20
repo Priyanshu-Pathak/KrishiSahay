@@ -2,6 +2,10 @@ const express=require("express")
 const mongoose=require('mongoose')
 const cors=require("cors")
 const RegisterModel=require('./model/Register')
+const ShopListModel=require('./model/ListShopModel')
+const multer=require('multer')
+const path=require('path')
+
 
 const app=express()
 app.use(express.json())
@@ -50,6 +54,61 @@ app.post('/login',(req,res)=>{
         }
     })
 })
+
+
+app.use(express.static('public'))
+
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/Images');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({
+    storage: storage
+})
+
+app.post('/upload', upload.single('file'), async (req, res) => {
+    try {
+        const image = req.file.filename;
+        const formData = req.body;
+
+        const shopData = {
+            image: image,
+            shopname: formData.shopname,
+            ownername: formData.ownername,
+            phonenumber: formData.phonenumber,
+            address: formData.address,
+            city: formData.city,
+            state: formData.state,
+            upi: formData.upi,
+            gst: formData.gst,
+            shopid:formData.shopid,
+            passwordshop:formData.passwordshop
+        };
+        const result = await ShopListModel.create(shopData);
+
+        res.status(200).json(result);
+    } catch (err) {
+        console.error('Error uploading file and data:', err);
+        res.status(500).json({ error: 'Upload failed' });
+    }
+});
+
+
+app.get('/shoplisting', async (req, res) => {
+    try {
+        const shops = await ShopListModel.find();
+        res.json(shops);
+    } catch (error) {
+        console.error('Error fetching shops:', error);
+        res.status(500).json({ error: 'Failed to fetch shops' });
+    }
+});
 
 mongoose.connect("mongodb://localhost:27017/KRISHISAHAY");
 app.listen(3002,()=>{
